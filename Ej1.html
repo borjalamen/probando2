@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej1</title>
+</head>
+
+<body>
+
+    <button type="button" onclick="altas()">ALTAS</button>
+    <button type="button" onclick="vacunas()">VACUNAR</button>
+    <button type="button" onclick="bajas()">BAJAS</button>
+    <div id="contenido"></div>
+    <script type="text/javascript">
+        var nuevasmascotas = new Array();
+        var nuevavacuna = new Array();
+
+        function Mascotas(idmascota, mascota, nombremasc, est) {
+
+            this.idmascota = idmascota;
+            this.mascota = mascota;
+            this.nombremasc = nombremasc;
+            this.est = est;
+        }
+
+        function Vacun(idanimal, razamascota, nombremascota, fecha, estado) {
+            this.idanimal = idanimal;
+            this.razamascota = razamascota;
+            this.nombremascota = nombremascota;
+            this.fecha = fecha;
+            this.estado = estado;
+        }
+
+
+        function altas() {
+            var id = prompt("id mascota");
+            var masc = prompt("tipo de mascota");
+            var nommasc = prompt("nombre mascota");
+            var estadoanimal = "alta";
+
+            var mimascota = new Mascotas(id, masc, nommasc, estadoanimal);
+            nuevasmascotas.push(mimascota);
+
+            alert("Mascota registrada");
+        }
+
+        function vacunas() {
+            var muestra = document.getElementById("contenido");
+            muestra.innerHTML = " ";
+            for (var i = 0; i < nuevasmascotas.length; i++) {
+                muestra.innerHTML += "identificador de mascota: " + nuevasmascotas[i].idmascota + "</br> Tipo: " + nuevasmascotas[i].mascota + "</br> Nombre: " + nuevasmascotas[i].nombremasc + "</br>" +
+                    "Estado: " + nuevasmascotas[i].est + "</br>" +
+                    "<input type='button' onclick='Vacunado(" + nuevasmascotas[i].idmascota + ")' value='Vacunar'/></br></br>";
+            }
+        }
+
+        function Vacunado(ident) {
+            var estadoanimal = "alta";
+            var fech = new Date();
+            var fechavac = (fech.getDate() + "/" + (fech.getMonth() + 1) + "/" + fech.getFullYear());
+            for (var i = 0; i < nuevasmascotas.length; i++) {
+                if (ident == nuevasmascotas[i].idmascota) {
+                    var mascotavacunada = new Vacun(ident, nuevasmascotas[i].mascota, nuevasmascotas[i].nombremasc, fechavac, estadoanimal);
+                    nuevavacuna.push(mascotavacunada);
+                    alert("Mascota vacunada");
+                }
+
+            }
+
+        }
+
+        function bajas() {
+            var muestra = document.getElementById("contenido");
+            muestra.innerHTML = " ";
+            for (var i = 0; i < nuevavacuna.length; i++) {
+                muestra.innerHTML += "identificador de mascota: " + nuevavacuna[i].idanimal + "</br> Tipo: " + nuevavacuna[i].razamascota + "</br> Nombre: " + nuevavacuna[i].nombremascota + "</br>Fecha vacunación: " + nuevavacuna[i].fecha + "</br>" +
+                    "<input type='button' onclick='darbaja(" + nuevavacuna[i].idanimal + ")' value='Dar de baja'/></br></br>";
+            }
+        }
+
+        function darbaja(ide) {
+            for (var i = 0; i < nuevavacuna.length; i++) {
+                if (ide == nuevavacuna.idanimal) {
+                    nuevavacuna[ide].estado = "baja";
+                }
+            }
+            for (var i = 0; i < nuevasmascotas.length; i++) {
+                if (ide == nuevasmascotas.idmascota) {
+                    nuevasmascotas[ide].estado = "baja";
+                }
+            }
+            alert("mascota dada de baja");
+        }
+    </script>
+</body>
+
+</html>

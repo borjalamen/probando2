@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ej2</title>
+</head>
+
+<body>
+
+    <script type="text/javascript">
+        var nums = new Array();
+        var inicio = 0;
+        var totales = 0;
+
+        function azarnumeros() {
+
+            for (var i = 100; i > 0; i--) {
+                inicio = Math.floor(Math.random() * 100) + 1;
+                nums.push(inicio);
+            }
+
+            for (var i = 0; i < nums.length; i++) {
+                for (var j = 0; j < nums.length; j++) {
+                    totales += nums[j];
+                }
+
+                totales -= nums[i];
+
+                if (nums[i] > totales) {
+                    alert(nums[i] + " mayor/es que la suma del resto");
+                }
+                totales = 0;
+            }
+        }
+    </script>
+    <button type="button" onclick="azarnumeros()">ALEATORIO</button>
+</body>
+
+</html>
